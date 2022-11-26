@@ -49,7 +49,7 @@ function buildMetadata(sample) {
     Object.entries(result).forEach(([key, value]) => {
       PANEL.append("h6").text(`${key.toUpperCase()}: ${value}`);
     });
-
+    console.log(result);
   });
 }
 
@@ -66,25 +66,26 @@ function buildCharts(sample) {
     var testArray = sampleData.filter(sampleObj => sampleObj.id == sample);
     console.log(testArray);
     //  5. Create a variable that holds the first sample in the array.
-    var test = testArray[0];
+    var testFirst = testArray[0];
+    console.log(testFirst);
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
-    var otu_ids = testArray.map(sampleObj => sampleObj.otu_ids);
+    var otu_ids = testFirst.otu_ids;
     console.log(otu_ids);
-    var otu_labels = testArray.map(sampleObj => sampleObj.otu_labels);
+    var otu_labels = testFirst.otu_labels;
     console.log(otu_labels);
-    var sample_values = testArray.map(sampleObj => sampleObj.sample_values);
+    var sample_values = testFirst.sample_values;
     console.log(sample_values);
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
     //  so the otu_ids with the most bacteria are last. 
 
-    var yticks = otu_ids.slice(0,10).reverse();
-
+    var yticks = otu_ids.slice(0,10).map(label => "OTU " + label).reverse();
+    console.log(yticks)
     // 8. Create the trace for the bar chart. 
     var barData = [{
-      x: sample_values,
-      y: otu_ids,
+      x: sample_values.slice(0,10).reverse(),
+      y: yticks,
       text: otu_labels,
       type: "bar",
       orientation: "h"
@@ -111,17 +112,21 @@ function buildCharts(sample) {
   
     var testArray = sampleData.filter(sampleObj => sampleObj.id == sample);
 
-    var test = testArray[0];
+    var testFirst = testArray[0];
 
-    var otu_ids = testArray.map(sampleObj => sampleObj.otu_ids);
-    var otu_labels = testArray.map(sampleObj => sampleObj.otu_labels);
-    var sample_values = testArray.map(sampleObj => sampleObj.sample_values);
+    var otu_ids = testFirst.otu_ids;
+    console.log(otu_ids);
+    var otu_labels = testFirst.otu_labels;
+    console.log(otu_labels);
+    var sample_values = testFirst.sample_values;
+    console.log(sample_values);
 
-    var yticks = otu_ids.slice(0,10).reverse();
+    var yticks =  otu_ids.slice(0,10).map(label => "OTU " + label).reverse();
+    console.log(yticks);
 
     var barData = [{
-      x: sample_values,
-      y: otu_ids,
+      x: sample_values.slice(0,10).reverse(),
+      y: yticks,
       text: otu_labels,
       type: "bar",
       orientation: "h"
@@ -172,24 +177,34 @@ function buildCharts(sample) {
     // 1. Create a variable that filters the metadata array for the object with the desired sample number.
     var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
     // Create a variable that holds the first sample in the array.
-    var test = testArray[0];
+    var testFirst = testArray[0];
 
     // 2. Create a variable that holds the first sample in the metadata array.
     var result = resultArray[0];
 
     // Create variables that hold the otu_ids, otu_labels, and sample_values.
-    var otu_ids = testArray.map(sampleObj => sampleObj.otu_ids);
-    var otu_labels = testArray.map(sampleObj => sampleObj.otu_labels);
-    var sample_values = testArray.map(sampleObj => sampleObj.sample_values);
+    var otu_ids = testFirst.otu_ids;
+    console.log(otu_ids);
+    var otu_labels = testFirst.otu_labels;
+    console.log(otu_labels);
+    var sample_values = testFirst.sample_values;
+    console.log(sample_values);
 
     // 3. Create a variable that holds the washing frequency.
-   
+    var wFreq = resultArray.map(sampleObj => sampleObj.wfreq);
+      d3.json("samples.json").then(function(data){
+        wfreq = data.metadata.map(person => person.wfreq);
+        console.log(wfreq);
+      });
+
     // Create the yticks for the bar chart.
+    var yticks =  otu_ids.slice(0,10).map(label => "OTU " + label).reverse();
+    console.log(yticks);
 
     // Use Plotly to plot the bar data and layout.
     var barData = [{
-      x: sample_values,
-      y: otu_ids,
+      x: sample_values.slice(0,10).reverse(),
+      y: yticks,
       text: otu_labels,
       type: "bar",
       orientation: "h"
@@ -233,4 +248,3 @@ function buildCharts(sample) {
     Plotly.newPlot("gauge", gaugeData, gaugeLayout);
   });
 }
-console.log("Hello");
