@@ -261,12 +261,22 @@ function buildCharts(sample) {
     }];
     
     // 5. Create the layout for the gauge chart.
-    var gaugeLayout = { 
+    var gaugeLayout = {
+      autosize: true, 
       title: "<b>Belly Button Washing Frequency</b>"
     };
 
     // 6. Use Plotly to plot the gauge data and layout.
     Plotly.newPlot("gauge", gaugeData, gaugeLayout);
   });
-  console.log("Hello");
 }
+
+d3.selectAll("body").on("change", updatePage);
+
+function updatePage() {
+  var dropdownMenu = d3.selectAll("#selectOption").node();
+  var selectedOption = dropdownMenu.value;
+
+  console.log(selectedOption);
+  buildCharts(selectedOption)
+};
