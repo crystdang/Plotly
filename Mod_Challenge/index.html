@@ -35,20 +35,20 @@
       </div>
         <div class="col-md-3">
           <div class="well">
-            <select id="selectOption">
+            <select id="selectOption" onchange="init(this)">
               <option value="bar">Top 10 Bacteria Found</option>
               <option value="bubble">Bacteria Cultures Per Sample</option>
-              <option value="gauge">Belly Button Washing Frequency</option>
             </select>
           </div>
         </div>
       </div>
       <div class="col-md-5">
-        <div id="bar"></div>
-      </div>
-      <div class="col-md-5">
         <div id="gauge"></div>
       </div>
+      <div class="col-md-5">
+        <div id="bar"></div>
+      </div>
+
     </div>
     <div class="row">
       <div class="col-md-12">
