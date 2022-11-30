@@ -10,16 +10,23 @@
   <link rel="stylesheet" href="static/css/style.css">
 </head>
 
-<body class="bg-dark">
+<body>
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
         <h1><b>Belly Button Biodiversity Dashboard</b></h1>
-        <p><b>Use the interactive charts below to explore the dataset</b></p>
+        <small><h3>Use the interactive charts below to explore the dataset</b></h3>
       </div>
     </div>
     <div class="row">
+      <div class="col-md-2">
+        <p>This page provides the demographic information of each volunteer along with the top 10 bacterial species in their belly buttons. 
+          <br><br>
+          Select the <i>Test Subject ID No.</i> to adjust the data and the <i>Chart</i> type for the top 10 bacteria found or the number of bacteria cultures found.
+          <br>
+          <br><b>Produced for Improbable Beef.</b></p>
+      </div>
       <div class="col-md-2">
         <div class="well">
           <h5>Test Subject ID No.:</h5>
@@ -33,30 +40,37 @@
           <div id="sample-metadata" class="panel-body"></div>
         </div>
       </div>
-        <div class="col-md-3">
-          <div class="well">
-            <select id="selectOption" onchange="init(this)">
-              <option value="bar">Top 10 Bacteria Found</option>
-              <option value="bubble">Bacteria Cultures Per Sample</option>
-            </select>
-          </div>
-        </div>
-      </div>
+
       <div class="col-md-5">
         <div id="gauge"></div>
       </div>
-      <div class="col-md-5">
-        <div id="bar"></div>
-      </div>
-
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div id="bubble"></div>
+    <br>
+    <div class="wrapper">
+      <div class="well">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+          <div class="col-md-3">
+              <h4>Chart:
+                <select id="selectOption" onchange="init(this)">
+                  <option value="bar">Top 10 Bacteria Found</option>
+                  <option value="bubble">Bacteria Cultures Per Sample</option>
+                </select>
+              </h4>
+          </div>
+        </nav>
       </div>
+    </div>
+      <div class="row">
+        <div class="col-md-5">
+          <div id="bar"></div>
+          <div id="bar-info"><h3>Note: Data provides only the top ten bacteria found.</h3></div>
+        </div>
+        <div class="col-md-12">
+          <div id="bubble"></div>
+          <div id="bubble-info"><h3>Note: Markers are sized by the sample's value.</h3></div>
+        </div>
     </div>
   </div>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="static/js/charts.js"></script>

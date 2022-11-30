@@ -67,6 +67,8 @@ function updatePage(sample) {
   if (selectedOption == 'bubble') {
     var PANEL = d3.select("#bar");
     PANEL.html("");
+    var bardes = d3.select("#bar-info");
+    bardes.html("");
     // Create the buildCharts function.
     function buildBubble(sample) {
       // Use d3.json to load and retrieve the samples.json file 
@@ -102,8 +104,6 @@ function updatePage(sample) {
         var bubbleLayout = {
           title: "Bacteria Cultures Per Sample",
           xaxis: {title:'OTU ID'},
-          //hovermode:
-          automargin: true,
         };
 
         // 3. Use Plotly to plot the data with the layout.
@@ -114,8 +114,10 @@ function updatePage(sample) {
   };
 
   if (selectedOption == 'bar') {
-    var PANEL = d3.select("#bubble");
-    PANEL.html("");
+    var bubchart = d3.select("#bubble");
+    bubchart.html("");
+    var bubdes = d3.select("#bubble-info");
+    bubdes.html("");
     function buildBar(sample) {
   
       // 2. Use d3.json to load and retrieve the samples.json file 
